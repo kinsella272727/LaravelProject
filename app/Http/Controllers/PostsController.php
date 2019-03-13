@@ -26,9 +26,13 @@ class PostsController extends Controller
         //return Post::where('title', 'Post Two')->get();
         //$posts = DB::select('SELECT * FROM posts');
         //$posts = Post::orderBy('title', 'desc')->take(1)->get();
+        clock('Test Posts.');
+        clock()->startEvent('get-all-posts', "Loading all posts from the database");
         $posts = Post::orderBy('title', 'desc')->get();
+        clock()->endEvent('get-all-posts');
         //$posts = Post::orderBy('title', 'desc')->paginate(1);
         return view('posts.index')->with('posts', $posts);
+
     }
 
     /**

@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Post::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
-        'body' => $faker->text,
+        'body' => $faker->realText,
         'created_at' => now(),
         'updated_at' => now(),
         'user_id' => function () {
@@ -29,9 +29,17 @@ $factory->define(App\Post::class, function (Faker $faker) {
 
             // $max = App\User::count();
             $max = 1000;
-            
+
             return mt_rand(1, $max);
         },
+
+        'category_id' => function () {
+            $max = 50;
+
+            return mt_rand(1, $max);
+        },
+
+        //imageUrl($width = 640, $height = 480) // 'http://lorempixel.com/640/480/'
         'cover_image' => 'noimage.jpg',
     ];
 });
